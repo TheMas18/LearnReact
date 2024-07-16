@@ -1,5 +1,6 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
+import TextForm from "./components/TextForm";
 //L1
 // let name = "TheMas";
 // function App() {
@@ -31,6 +32,10 @@ function App() {
       {/* default props */}
       {/* <Navbar/> */}
       <Navbar title="TextUtils" aboutText="About Us" /> 
+      <div className="container my-3">
+
+      <TextForm heading="Enter the text to analyze"/>
+      </div>
     </>
   );
 }
