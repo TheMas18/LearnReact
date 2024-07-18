@@ -3,6 +3,7 @@ import "./App.css";
 import AboutUs from "./components/AboutUs";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
+import Alert from "./components/Alert";
 //L1
 // let name = "TheMas";
 // function App() {
@@ -27,27 +28,43 @@ import TextForm from "./components/TextForm";
 // }
 
 function App() {
-const [mode,setMode]=useState('light');
-const toggleMode=()=>{
-    if(mode==='light'){
-      setMode('dark');
-      document.body.style.backgroundColor='grey';
-    }else{
-      setMode('light');
-      document.body.style.backgroundColor='white';
+  const [mode, setMode] = useState("light");
+  const toggleMode = () => {
+    if (mode === "light") {
+      setMode("dark");
+      document.body.style.backgroundColor = "grey";
+      showAlert("Dark Mode has been enabled","success");
+    } else {
+      setMode("light");
+      document.body.style.backgroundColor = "white";
+      showAlert("Light Mode has been enabled","success");
     }
-}
+  };
+
+  const [alert,setAlert]=useState(null);
+  const showAlert=(message,type)=>{
+        setAlert({
+          msg:message,
+          type:type
+
+        })
+  }
   return (
     <>
       {/* we can add any name for props */}
       {/* <Navbar title="TextUtils" aboutText="About Us" /> */}
       {/* default props */}
       {/* <Navbar/> */}
-      <Navbar title="TextUtils" aboutText="About Us"  mode={mode} toggleMode={toggleMode}/> 
+      <Navbar
+        title="TextUtils"
+        aboutText="About Us"
+        mode={mode}
+        toggleMode={toggleMode}
+      />
+      <Alert alert={alert}/>
       <div className="container my-3">
-
-      <TextForm heading="Enter the text to analyze" mode={mode}/>
-      {/* <AboutUs/> */}
+        <TextForm heading="Enter the text to analyze" mode={mode} />
+        {/* <AboutUs/> */}
       </div>
     </>
   );
