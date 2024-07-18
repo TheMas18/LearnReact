@@ -4,6 +4,9 @@ import AboutUs from "./components/AboutUs";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import Alert from "./components/Alert";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 //L1
 // let name = "TheMas";
 // function App() {
@@ -33,24 +36,24 @@ function App() {
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "grey";
-      showAlert("Dark Mode has been enabled","success");
+      showAlert("Dark Mode has been enabled", "success");
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
-      showAlert("Light Mode has been enabled","success");
+      showAlert("Light Mode has been enabled", "success");
     }
   };
 
-  const [alert,setAlert]=useState(null);
-  const showAlert=(message,type)=>{
-        setAlert({
-          msg:message,
-          type:type
-
-        })
-  }
+  const [alert, setAlert] = useState(null);
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+  };
   return (
     <>
+    <Router>
       {/* we can add any name for props */}
       {/* <Navbar title="TextUtils" aboutText="About Us" /> */}
       {/* default props */}
@@ -61,11 +64,14 @@ function App() {
         mode={mode}
         toggleMode={toggleMode}
       />
-      <Alert alert={alert}/>
+      <Alert alert={alert} />
       <div className="container my-3">
-        <TextForm heading="Enter the text to analyze" mode={mode} />
-        {/* <AboutUs/> */}
-      </div>
+          <Routes>
+            <Route exact path="/about" element={<AboutUs />} />
+            <Route exact path="/" element={<TextForm heading="Enter the text to analyze" mode={mode} />} />
+          </Routes>
+        </div>
+      </Router>
     </>
   );
 }
